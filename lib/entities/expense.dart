@@ -39,7 +39,7 @@ class Expense {
     amount: json["amount"],
     dateTimeMillis: json["date_time"],
     details: json["details"],
-    category: json["category"],
+    category: json["category"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -47,7 +47,7 @@ class Expense {
     "amount": amount,
     "date_time": dateTimeMillis,
     "details": details,
-    "category": category,
+    "category": category
   };
 
   int convertDateTimeToMilliseconds(DateTime dateTime){
