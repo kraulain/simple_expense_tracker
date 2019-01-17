@@ -19,7 +19,7 @@ class DBConnect {
       await db.execute("CREATE TABLE expense ("
           "id INTEGER PRIMARY KEY,"
           "amount REAL,"
-          "date INTEGER,"
+          "date_time INTEGER,"
           "category TEXT,"
           "details TEXT"
           ")");
