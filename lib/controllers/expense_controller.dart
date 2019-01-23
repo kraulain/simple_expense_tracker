@@ -37,16 +37,13 @@ class ExpenseController {
 
   thisWeeksExpenses() async {
     var now = new DateTime.now();
-    var formatter = new DateFormat('yyyy-MM-dd');
-    String todaysDateString = formatter.format(now);
-    var todaysDate = DateTime.parse(todaysDateString);
-    var oneWeekAgo = todaysDate.subtract(new Duration( days: 7));
 
     num amount = 0.0;
 
     List<Expense> allExpenses = await expenseDao.selectAll();
     for(var i=0; i<allExpenses.length; i++){
-      if(todaysDate == formatter.format(allExpenses[i].dateTime)){
+      var difference = allExpenses[i].dateTime.difference(now);
+      if(difference.inDays <= 7){
         amount += allExpenses[i].amount;
       }
     }
