@@ -4,7 +4,9 @@
 *
 */
 
+import 'package:intl/intl.dart';
 import 'package:simple_expense_tracker/dao/expense_dao.dart';
+import 'package:simple_expense_tracker/entities/expense.dart';
 import 'package:simple_expense_tracker/services/db_connect.dart';
 
 class ExpenseController {
@@ -14,6 +16,23 @@ class ExpenseController {
   ExpenseController(){
     final DBConnect dBConnect = DBConnect.db;
     this.expenseDao = ExpenseDao(dBConnect);
+  }
+
+  todaysExpenses() async {
+    var now = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String todaysDate = formatter.format(now);
+
+    num amount = 0.0;
+
+    List<Expense> allExpenses = await expenseDao.selectAll();
+    for(var i=0; i<allExpenses.length; i++){
+      if(todaysDate == formatter.format(allExpenses[i].dateTime)){
+        amount += allExpenses[i].amount;
+      }
+    }
+
+    return amount;
   }
 
 }
