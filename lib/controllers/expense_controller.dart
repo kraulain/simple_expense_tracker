@@ -42,8 +42,23 @@ class ExpenseController {
 
     List<Expense> allExpenses = await expenseDao.selectAll();
     for(var i=0; i<allExpenses.length; i++){
-      var difference = allExpenses[i].dateTime.difference(now);
+      var difference = now.difference(allExpenses[i].dateTime);
       if(difference.inDays <= 7){
+        amount += allExpenses[i].amount;
+      }
+    }
+
+    return amount;
+  }
+
+  thisMonthsExpenses() async {
+    var now = new DateTime.now();
+
+    num amount = 0.0;
+
+    List<Expense> allExpenses = await expenseDao.selectAll();
+    for(var i=0; i<allExpenses.length; i++){
+      if(allExpenses[i].dateTime.month == now.month && allExpenses[i].dateTime.year == now.year){
         amount += allExpenses[i].amount;
       }
     }
