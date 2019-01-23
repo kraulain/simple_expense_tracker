@@ -35,4 +35,23 @@ class ExpenseController {
     return amount;
   }
 
+  thisWeeksExpenses() async {
+    var now = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String todaysDateString = formatter.format(now);
+    var todaysDate = DateTime.parse(todaysDateString);
+    var oneWeekAgo = todaysDate.subtract(new Duration( days: 7));
+
+    num amount = 0.0;
+
+    List<Expense> allExpenses = await expenseDao.selectAll();
+    for(var i=0; i<allExpenses.length; i++){
+      if(todaysDate == formatter.format(allExpenses[i].dateTime)){
+        amount += allExpenses[i].amount;
+      }
+    }
+
+    return amount;
+  }
+
 }
