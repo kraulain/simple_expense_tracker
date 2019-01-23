@@ -81,7 +81,7 @@ class ExpenseController {
     return amount;
   }
 
-  ExpensesAllTime() async {
+  expensesAllTime() async {
     var now = new DateTime.now();
 
     num amount = 0.0;
@@ -92,6 +92,10 @@ class ExpenseController {
     }
 
     return amount;
+  }
+
+  newExpense(Expense expense) async{
+    return await expenseDao.insert(expense);
   }
 
 }
