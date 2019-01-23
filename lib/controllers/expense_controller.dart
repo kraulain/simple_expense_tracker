@@ -98,4 +98,8 @@ class ExpenseController {
     return await expenseDao.insert(expense);
   }
 
+  getAllExpenses() async {
+    return await expenseDao.selectAll();
+  }
+
 }
