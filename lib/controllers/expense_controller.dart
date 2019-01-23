@@ -18,7 +18,7 @@ class ExpenseController {
     this.expenseDao = ExpenseDao(dBConnect);
   }
 
-  todaysExpenses() async {
+  expensesToday() async {
     var now = new DateTime.now();
     var formatter = new DateFormat('yyyy-MM-dd');
     String todaysDate = formatter.format(now);
@@ -35,7 +35,7 @@ class ExpenseController {
     return amount;
   }
 
-  thisWeeksExpenses() async {
+  expensesThisWeek() async {
     var now = new DateTime.now();
 
     num amount = 0.0;
@@ -51,7 +51,7 @@ class ExpenseController {
     return amount;
   }
 
-  thisMonthsExpenses() async {
+  expensesThisMonth() async {
     var now = new DateTime.now();
 
     num amount = 0.0;
@@ -61,6 +61,34 @@ class ExpenseController {
       if(allExpenses[i].dateTime.month == now.month && allExpenses[i].dateTime.year == now.year){
         amount += allExpenses[i].amount;
       }
+    }
+
+    return amount;
+  }
+
+  expensesThisYear() async {
+    var now = new DateTime.now();
+
+    num amount = 0.0;
+
+    List<Expense> allExpenses = await expenseDao.selectAll();
+    for(var i=0; i<allExpenses.length; i++){
+      if(allExpenses[i].dateTime.year == now.year){
+        amount += allExpenses[i].amount;
+      }
+    }
+
+    return amount;
+  }
+
+  ExpensesAllTime() async {
+    var now = new DateTime.now();
+
+    num amount = 0.0;
+
+    List<Expense> allExpenses = await expenseDao.selectAll();
+    for(var i=0; i<allExpenses.length; i++){
+        amount += allExpenses[i].amount;
     }
 
     return amount;
