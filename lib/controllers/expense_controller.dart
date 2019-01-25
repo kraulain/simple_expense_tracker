@@ -102,4 +102,8 @@ class ExpenseController {
     return await expenseDao.selectAll();
   }
 
+  editExpense(Expense expense) async {
+    return await expenseDao.update(expense);
+  }
+
 }
