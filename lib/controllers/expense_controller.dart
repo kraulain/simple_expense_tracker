@@ -106,4 +106,8 @@ class ExpenseController {
     return await expenseDao.update(expense);
   }
 
+  deleteExpense(Expense expense) async {
+    return await expenseDao.delete(expense.id);
+  }
+
 }
