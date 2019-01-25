@@ -94,7 +94,7 @@ class ExpenseController {
     return amount;
   }
 
-  newExpense(Expense expense) async{
+  newExpense(Expense expense) async {
     return await expenseDao.insert(expense);
   }
 
@@ -108,6 +108,16 @@ class ExpenseController {
 
   deleteExpense(Expense expense) async {
     return await expenseDao.delete(expense.id);
+  }
+
+  getAllExpenseCategories() async {
+    List<Expense> allExpenses = await expenseDao.selectAll();
+    List<String> categories;
+    for(var i=0; i<allExpenses.length; i++){
+      categories.add(allExpenses[i].category);
+    }
+
+    return categories;
   }
 
 }
