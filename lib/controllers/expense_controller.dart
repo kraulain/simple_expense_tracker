@@ -111,10 +111,10 @@ class ExpenseController {
   }
 
   getAllExpenseCategories() async {
-    List<Expense> allExpenses = await expenseDao.selectAll();
+    List<Expense> expenses = await expenseDao.selectAll();
     List<String> categories;
-    for(var i=0; i<allExpenses.length; i++){
-      categories.add(allExpenses[i].category);
+    for(var i=0; i<expenses.length; i++){
+      categories.add(expenses[i].category);
     }
 
     return categories;
