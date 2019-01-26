@@ -25,10 +25,10 @@ class ExpenseController {
 
     num amount = 0.0;
 
-    List<Expense> allExpenses = await expenseDao.selectAll();
-    for(var i=0; i<allExpenses.length; i++){
-      if(todaysDate == formatter.format(allExpenses[i].dateTime)){
-        amount += allExpenses[i].amount;
+    List<Expense> expenses = await expenseDao.selectAll();
+    for(var i=0; i<expenses.length; i++){
+      if(todaysDate == formatter.format(expenses[i].dateTime)){
+        amount += expenses[i].amount;
       }
     }
 
