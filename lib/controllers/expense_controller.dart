@@ -35,7 +35,7 @@ class ExpenseController {
     return amount;
   }
 
-  expensesThisWeek() async {
+  getThisWeeksExpenses() async {
     var now = new DateTime.now();
 
     num amount = 0.0;
