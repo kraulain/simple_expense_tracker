@@ -40,11 +40,11 @@ class ExpenseController {
 
     num amount = 0.0;
 
-    List<Expense> allExpenses = await expenseDao.selectAll();
-    for(var i=0; i<allExpenses.length; i++){
-      var difference = now.difference(allExpenses[i].dateTime);
+    List<Expense> expenses = await expenseDao.selectAll();
+    for(var i=0; i<expenses.length; i++){
+      var difference = now.difference(expenses[i].dateTime);
       if(difference.inDays <= 7){
-        amount += allExpenses[i].amount;
+        amount += expenses[i].amount;
       }
     }
 
