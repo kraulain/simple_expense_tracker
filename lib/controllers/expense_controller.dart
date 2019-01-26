@@ -56,10 +56,10 @@ class ExpenseController {
 
     num amount = 0.0;
 
-    List<Expense> allExpenses = await expenseDao.selectAll();
-    for(var i=0; i<allExpenses.length; i++){
-      if(allExpenses[i].dateTime.month == now.month && allExpenses[i].dateTime.year == now.year){
-        amount += allExpenses[i].amount;
+    List<Expense> expenses = await expenseDao.selectAll();
+    for(var i=0; i<expenses.length; i++){
+      if(expenses[i].dateTime.month == now.month && expenses[i].dateTime.year == now.year){
+        amount += expenses[i].amount;
       }
     }
 
