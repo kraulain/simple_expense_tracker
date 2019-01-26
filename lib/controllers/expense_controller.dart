@@ -81,7 +81,7 @@ class ExpenseController {
     return amount;
   }
 
-  expensesAllTime() async {
+  getAllTimeExpenses() async {
     var now = new DateTime.now();
 
     num amount = 0.0;
