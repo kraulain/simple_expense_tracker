@@ -66,7 +66,7 @@ class ExpenseController {
     return amount;
   }
 
-  expensesThisYear() async {
+  getThisYearsExpenses() async {
     var now = new DateTime.now();
 
     num amount = 0.0;
