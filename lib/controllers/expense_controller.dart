@@ -18,7 +18,7 @@ class ExpenseController {
     this.expenseDao = ExpenseDao(dBConnect);
   }
 
-  expensesToday() async {
+  getTodaysExpenses() async {
     var now = new DateTime.now();
     var formatter = new DateFormat('yyyy-MM-dd');
     String todaysDate = formatter.format(now);
