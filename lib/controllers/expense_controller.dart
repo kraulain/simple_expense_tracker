@@ -86,9 +86,9 @@ class ExpenseController {
 
     num amount = 0.0;
 
-    List<Expense> allExpenses = await expenseDao.selectAll();
-    for(var i=0; i<allExpenses.length; i++){
-        amount += allExpenses[i].amount;
+    List<Expense> expenses = await expenseDao.selectAll();
+    for(var i=0; i<expenses.length; i++){
+        amount += expenses[i].amount;
     }
 
     return amount;
