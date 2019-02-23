@@ -76,10 +76,11 @@ class _NewExpensePageState extends State<NewExpensePage> {
                         category: _categoryController.text,
                         details: _detailsController.text,
                         dateTime: new DateTime.now());
-                    _expenseController.newExpense(expense);
-                    clearTextFields();
-                    Scaffold.of(context).showSnackBar(SnackBar(duration: const Duration(seconds: 1), content: Text('Expense Recorded Succesfully')));
-                    //change tab
+                    _expenseController.newExpense(expense).then((newExpense){
+                      clearTextFields();
+                      Scaffold.of(context).showSnackBar(SnackBar(duration: const Duration(seconds: 1), content: Text('Expense Recorded Succesfully')));
+                    });
+                    //TODO: change tab
                   },
                 ),
               ],

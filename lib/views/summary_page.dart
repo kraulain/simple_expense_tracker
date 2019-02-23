@@ -68,7 +68,7 @@ class _SummaryPageState extends State<SummaryPage> {
           ),
         ],
       ),
-      body: allTime == 0 ? Center(child: Text('Loading ...')) : ListView(
+      body: allTime == 0 ? Center(child: Image(image:  AssetImage("lib/assets/piggy.gif"))) : ListView(
         children: <Widget>[
           ListTile(
             leading: Icon(Icons.watch_later),
