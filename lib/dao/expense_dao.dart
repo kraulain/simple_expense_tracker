@@ -4,43 +4,42 @@
 *
 */
 
-import '../services/db_connect.dart';
-import "../entities/expense.dart";
+import 'package:piggy/services/db_connect.dart';
+import "package:piggy/entities/expense.dart";
 
 class ExpenseDao {
-
   DBConnect dbConnect;
 
   ExpenseDao(this.dbConnect);
 
-  insert(Expense expense) async {
+  Future<Expense> insert(Expense expense) async {
     final db = await dbConnect.database;
-    var res = await db.insert("expense", expense.toJson());
-    return res;
+    expense.id = await db.insert("expense", expense.toJson());
+    return expense;
   }
 
-  selectById(int id) async {
+  Future<Expense> selectById(int id) async {
     final db = await dbConnect.database;
-    var res =await  db.query("expense", where: "id = ?", whereArgs: [id]);
-    return res.isNotEmpty ? Expense.fromJson(res.first) : Null ;
+    var res = await db.query("expense", where: "id = ?", whereArgs: [id]);
+    return res.isNotEmpty ? Expense.fromJson(res.first) : Null;
   }
 
-  selectAll() async {
+  Future<List<Expense>> selectAll() async {
     final db = await dbConnect.database;
     var res = await db.query("expense");
     List<Expense> list =
-    res.isNotEmpty ? res.map((c) => Expense.fromJson(c)).toList() : [];
+        res.isNotEmpty ? res.map((c) => Expense.fromJson(c)).toList() : [];
     return list;
   }
 
-  update(Expense expense) async {
+  Future<int> update(Expense expense) async {
     final db = await dbConnect.database;
     var res = await db.update("expense", expense.toJson(),
         where: "id = ?", whereArgs: [expense.id]);
     return res;
   }
 
-  delete(int id) async {
+  Future<int> delete(int id) async {
     final db = await dbConnect.database;
     db.delete("expense", where: "id = ?", whereArgs: [id]);
   }

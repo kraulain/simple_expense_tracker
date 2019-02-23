@@ -35,4 +35,6 @@ class DBConnect {
     return _database;
   }
 
+  Future close() async => db.close();
+
 }
