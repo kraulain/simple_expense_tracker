@@ -17,7 +17,7 @@ class DBConnect {
     return await openDatabase(path, version: 1, onOpen: (db) {
     }, onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE expense ("
-          "id INTEGER PRIMARY KEY,"
+          "id INTEGER PRIMARY KEY AUTOINCREMENT,"
           "amount REAL,"
           "date_time INTEGER,"
           "category TEXT,"

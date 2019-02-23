@@ -17,137 +17,111 @@ class ExpenseController {
     this.expenseDao = ExpenseDao(dBConnect);
   }
 
-  num getTodaysExpenses() {
+  Future<num> getTodaysExpenses() async {
     var now = new DateTime.now();
     var formatter = new DateFormat('yyyy-MM-dd');
     String todaysDate = formatter.format(now);
 
     num amount = 0.0;
 
-//    List<Expense> expenses = await expenseDao.selectAll();
-    expenseDao.selectAll().then((expenses) {
-      for (var i = 0; i < expenses.length; i++) {
-        if (todaysDate == formatter.format(expenses[i].dateTime)) {
-          amount += expenses[i].amount;
-        }
+    List<Expense> expenses = await expenseDao.selectAll();
+    for (var i = 0; i < expenses.length; i++) {
+      if (todaysDate == formatter.format(expenses[i].dateTime)) {
+        amount += expenses[i].amount;
       }
-    });
+    }
 
     return amount;
   }
 
-  num getThisWeeksExpenses() {
+  Future<num> getThisWeeksExpenses() async{
     var now = new DateTime.now();
 
     num amount = 0.0;
 
-    expenseDao.selectAll().then((expenses) {
-      for (var i = 0; i < expenses.length; i++) {
-        var difference = now.difference(expenses[i].dateTime);
-        if (difference.inDays <= 7) {
-          amount += expenses[i].amount;
-        }
+    List<Expense> expenses = await expenseDao.selectAll();
+    for (var i = 0; i < expenses.length; i++) {
+      var difference = now.difference(expenses[i].dateTime);
+      if (difference.inDays <= 7) {
+        amount += expenses[i].amount;
       }
-    });
+    }
 
     return amount;
   }
 
-  num getThisMonthsExpenses() {
+  Future<num> getThisMonthsExpenses() async{
     var now = new DateTime.now();
 
     num amount = 0.0;
 
-    expenseDao.selectAll().then((expenses) {
-      for (var i = 0; i < expenses.length; i++) {
-        if (expenses[i].dateTime.month == now.month &&
-            expenses[i].dateTime.year == now.year) {
-          amount += expenses[i].amount;
-        }
+    List<Expense> expenses = await expenseDao.selectAll();
+    for (var i = 0; i < expenses.length; i++) {
+      if (expenses[i].dateTime.month == now.month &&
+          expenses[i].dateTime.year == now.year) {
+        amount += expenses[i].amount;
       }
-    });
+    }
 
     return amount;
   }
 
-  num getThisYearsExpenses() {
+  Future<num> getThisYearsExpenses() async{
     var now = new DateTime.now();
 
     num amount = 0.0;
 
-    expenseDao.selectAll().then((expenses) {
+    List<Expense> expenses = await expenseDao.selectAll();
       for (var i = 0; i < expenses.length; i++) {
         if (expenses[i].dateTime.year == now.year) {
           amount += expenses[i].amount;
         }
       }
-    });
 
     return amount;
   }
 
-  num getAllTimeExpenses() {
+  Future<num> getAllTimeExpenses() async{
     var now = new DateTime.now();
 
     num amount = 0.0;
 
-    expenseDao.selectAll().then((expenses) {
+    List<Expense> expenses = await expenseDao.selectAll();
       for (var i = 0; i < expenses.length; i++) {
         amount += expenses[i].amount;
       }
-    });
 
     return amount;
   }
 
-  Expense newExpense(Expense expense) {
-    Expense newExpense;
-
-    expenseDao.insert(expense).then((e) {
-      newExpense = e;
-    });
+  Future<Expense> newExpense(Expense expense) async{
+    Expense newExpense = await expenseDao.insert(expense);
     return newExpense;
   }
 
-  List<Expense> getAllExpenses() {
-    List<Expense> expenses;
-
-    expenseDao.selectAll().then((e) {
-      expenses = e;
-    });
-
+  Future<List<Expense>> getAllExpenses() async{
+    List<Expense> expenses = await expenseDao.selectAll();
     return expenses;
   }
 
-  int editExpense(Expense expense) {
-    int updateCount;
-
-    expenseDao.update(expense).then((count) {
-      updateCount = count;
-    });
-
+  Future<int> editExpense(Expense expense) async{
+    int updateCount = await expenseDao.update(expense);
     return updateCount;
   }
 
-  int deleteExpense(Expense expense) {
-    int deleteCount;
-
-    expenseDao.delete(expense.id).then((count) {
-      deleteCount = count;
-    });
-
+  Future<int> deleteExpense(Expense expense) async{
+    int deleteCount = await expenseDao.delete(expense.id);
     return deleteCount;
   }
 
-  List<String> getAllExpenseCategories() {
+  Future<List<String>> getAllExpenseCategories() async{
     List<String> categories;
 
-    expenseDao.selectAll().then((expenses) {
+    List<Expense> expenses = await expenseDao.selectAll();
       for (var i = 0; i < expenses.length; i++) {
         categories.add(expenses[i].category);
       }
-    });
-
     return categories;
   }
+
 }

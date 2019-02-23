@@ -1,7 +1,7 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:piggy/views/summary.dart';
+import 'package:piggy/views/details_page.dart';
+import 'package:piggy/views/new_expense_page.dart';
+import 'package:piggy/views/summary_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,10 +12,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
+
   final List<Widget> _children = [
     SummaryPage(title: 'Summary'),
-    SummaryPage(title: 'Details'),
-    SummaryPage(title: 'New'),
+    DetailsPage(),
+    NewExpensePage(),
     SummaryPage(title: 'Reports'),
     SummaryPage(title: 'Settings')
   ];

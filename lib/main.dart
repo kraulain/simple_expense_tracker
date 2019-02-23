@@ -22,6 +22,9 @@ class MyApp extends StatelessWidget {
         // This colors the [InputOutlineBorder] when it is selected
         primaryColor: Colors.pink[500],
         textSelectionHandleColor: Colors.green[500],
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(),
+        ),
       ),
       home: HomePage(),
     );

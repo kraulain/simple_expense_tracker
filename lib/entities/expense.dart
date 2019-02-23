@@ -25,7 +25,7 @@ class Expense {
   DateTime dateTime;
 
   Expense(
-      {this.id = 0,
+      {this.id,
       this.amount,
       this.dateTimeMillis,
       this.category,

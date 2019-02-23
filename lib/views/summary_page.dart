@@ -13,6 +13,45 @@ class SummaryPage extends StatefulWidget {
 class _SummaryPageState extends State<SummaryPage> {
   ExpenseController _controller = ExpenseController();
 
+  double today = 0, thisWeek = 0, thisMonth = 0, thisYear = 0, allTime = 0;
+
+  @override
+  void initState() {
+
+    super.initState();
+
+    _controller.getTodaysExpenses().then((amount) {
+      setState(() {
+        today = amount;
+      });
+    });
+
+    _controller.getThisWeeksExpenses().then((amount) {
+      setState(() {
+        thisWeek = amount;
+      });
+    });
+
+    _controller.getThisMonthsExpenses().then((amount) {
+      setState(() {
+        thisMonth = amount;
+      });
+    });
+
+    _controller.getThisYearsExpenses().then((amount) {
+      setState(() {
+        thisYear = amount;
+      });
+    });
+
+    _controller.getAllTimeExpenses().then((amount) {
+      setState(() {
+        allTime = amount;
+      });
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,32 +68,32 @@ class _SummaryPageState extends State<SummaryPage> {
           ),
         ],
       ),
-      body: ListView(
+      body: allTime == 0 ? Center(child: Text('Loading ...')) : ListView(
         children: <Widget>[
           ListTile(
             leading: Icon(Icons.watch_later),
             title: Text('Today: '),
-            subtitle: Text('XAF ' + _controller.getTodaysExpenses().toString()),
+            subtitle: Text('XAF ' + today.toString()),
           ),
           ListTile(
             leading: Icon(Icons.view_list),
             title: Text('This Week: '),
-            subtitle: Text('XAF ' + _controller.getTodaysExpenses().toString()),
+            subtitle: Text('XAF ' + thisWeek.toString()),
           ),
           ListTile(
             leading: Icon(Icons.today),
             title: Text('This Month: '),
-            subtitle: Text('XAF ' + _controller.getTodaysExpenses().toString()),
+            subtitle: Text('XAF ' + thisMonth.toString()),
           ),
           ListTile(
             leading: Icon(Icons.calendar_today),
             title: Text('This Year: '),
-            subtitle: Text('XAF ' + _controller.getTodaysExpenses().toString()),
+            subtitle: Text('XAF ' + thisYear.toString()),
           ),
           ListTile(
             leading: Icon(Icons.insert_chart),
             title: Text('All Time: '),
-            subtitle: Text('XAF ' + _controller.getTodaysExpenses().toString()),
+            subtitle: Text('XAF ' + allTime.toString()),
           ),
         ],
       ),
