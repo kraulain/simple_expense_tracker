@@ -4,7 +4,7 @@
 *
 */
 
-import 'package:simple_expense_tracker/services/db_connect.dart';
+import '../services/db_connect.dart';
 import "../entities/expense.dart";
 
 class ExpenseDao {

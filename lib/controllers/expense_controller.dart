@@ -5,9 +5,9 @@
 */
 
 import 'package:intl/intl.dart';
-import 'package:simple_expense_tracker/dao/expense_dao.dart';
-import 'package:simple_expense_tracker/entities/expense.dart';
-import 'package:simple_expense_tracker/services/db_connect.dart';
+import '../dao/expense_dao.dart';
+import '../entities/expense.dart';
+import '../services/db_connect.dart';
 
 class ExpenseController {
 
