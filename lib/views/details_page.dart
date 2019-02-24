@@ -148,8 +148,10 @@ class _DetailsPageState extends State<DetailsPage> {
         });
       });
       Scaffold.of(context).showSnackBar(SnackBar(
-          duration: const Duration(seconds: 1),
-          content: Text('Expense deleted Succesfully')));
+        duration: const Duration(seconds: 1),
+        content: Text('Expense deleted Succesfully'),
+        backgroundColor: Colors.green[600],
+      ));
     });
   }
 }

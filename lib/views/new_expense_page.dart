@@ -40,23 +40,26 @@ class _NewExpensePageState extends State<NewExpensePage> {
               keyboardType: TextInputType.number,
               controller: _amountController,
               decoration: InputDecoration(
-                  labelText: 'Amount',
-                  hintText: 'Enter the amount spent'),
+                labelText: 'Amount',
+                hintText: 'Enter the amount spent',
+              ),
             ),
             SizedBox(height: 12.0),
             TextField(
               controller: _categoryController,
               decoration: InputDecoration(
-                  labelText: 'Category',
-                  hintText: 'Ex: Transport, Telephone, Rent '),
+                labelText: 'Category',
+                hintText: 'Ex: Transport, Telephone, Rent ',
+              ),
             ),
             SizedBox(height: 12.0),
             TextField(
               maxLines: 5,
               controller: _detailsController,
               decoration: InputDecoration(
-                  labelText: 'Details',
-                  hintText: 'Detailed description of what you spent on.'),
+                labelText: 'Details',
+                hintText: 'Detailed description of what you spent on.',
+              ),
             ),
             SizedBox(height: 12.0),
             ButtonBar(
@@ -71,15 +74,27 @@ class _NewExpensePageState extends State<NewExpensePage> {
                   color: Colors.pink[500],
                   child: Text('RECORD'),
                   onPressed: () {
-                    Expense expense = Expense(
-                        amount: double.parse(_amountController.text),
-                        category: _categoryController.text,
-                        details: _detailsController.text,
-                        dateTime: new DateTime.now());
-                    _expenseController.newExpense(expense).then((newExpense){
-                      clearTextFields();
-                      Scaffold.of(context).showSnackBar(SnackBar(duration: const Duration(seconds: 1), content: Text('Expense Recorded Succesfully')));
-                    });
+                    if (validateInputs()) {
+                      Expense expense = Expense(
+                          amount: double.parse(_amountController.text),
+                          category: _categoryController.text,
+                          details: _detailsController.text,
+                          dateTime: new DateTime.now());
+                      _expenseController.newExpense(expense).then((newExpense) {
+                        clearTextFields();
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          duration: const Duration(seconds: 1),
+                          content: Text('Expense Recorded Succesfully'),
+                          backgroundColor: Colors.green[600],
+                        ));
+                      });
+                    } else {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        duration: const Duration(seconds: 1),
+                        content: Text('Invalid Inputs'),
+                        backgroundColor: Colors.green[600],
+                      ));
+                    }
                     //TODO: change tab
                   },
                 ),
@@ -91,9 +106,20 @@ class _NewExpensePageState extends State<NewExpensePage> {
     );
   }
 
-  clearTextFields() {
+  void clearTextFields() {
     _amountController.clear();
     _categoryController.clear();
     _detailsController.clear();
+  }
+
+  bool validateInputs() {
+    if (_amountController.text.isNotEmpty &&
+        double.tryParse(_amountController.text) != null) {
+      if (_categoryController.text.isNotEmpty) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
