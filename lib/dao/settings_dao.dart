@@ -25,19 +25,19 @@ class SettingsDao {
 
   Future<Settings> selectById() async {
     final db = await dbConnect.database;
-    var res = await db.query("settings", where: "id = ?", whereArgs: [0]);
+    var res = await db.query("settings", where: "id = ?", whereArgs: [1]);
     return res.isNotEmpty ? Settings.fromJson(res.first) : null;
   }
 
   Future<int> update(Settings settings) async {
     final db = await dbConnect.database;
     var res = await db.update("settings", settings.toJson(),
-        where: "id = ?", whereArgs: [0]);
+        where: "id = ?", whereArgs: [1]);
     return res;
   }
 
   getDefault(){
-    return Settings(language: "en", currency: "\$", backup: 'true');
+    return Settings(language: "En", currency: "\$", backup: 'yes');
   }
 
 }

@@ -8,10 +8,10 @@ import 'package:piggy/dao/settings_dao.dart';
 import 'package:piggy/entities/settings.dart';
 import 'package:piggy/services/db_connect.dart';
 
-class ExpenseController {
+class SettingsController {
   SettingsDao settingsDao;
 
-  ExpenseController() {
+  SettingsController() {
     final DBConnect dBConnect = DBConnect.db;
     this.settingsDao = SettingsDao(dBConnect);
   }
@@ -21,7 +21,7 @@ class ExpenseController {
     return settings;
   }
 
-  Future<int> changeExpense(Settings settings) async{
+  Future<int> changeSettings(Settings settings) async{
     int updateCount = await settingsDao.update(settings);
     return updateCount;
   }

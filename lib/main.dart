@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:piggy/views/home_page.dart';
+import 'package:preferences/preferences.dart';
 
-void main() => runApp(MyApp());
+void main() async{
+  await PrefService.init(prefix: 'pref_');
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

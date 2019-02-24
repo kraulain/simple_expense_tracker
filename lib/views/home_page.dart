@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:piggy/views/details_page.dart';
 import 'package:piggy/views/new_expense_page.dart';
+import 'package:piggy/views/settings_page.dart';
 import 'package:piggy/views/summary_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     DetailsPage(),
     NewExpensePage(),
     SummaryPage(title: 'Reports'),
-    SummaryPage(title: 'Settings')
+    SettingsPage()
   ];
 
   @override

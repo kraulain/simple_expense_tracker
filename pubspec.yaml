@@ -27,6 +27,7 @@ dependencies:
   #other utils
   intl: ^0.15.7
   flutter_launcher_icons: "^0.7.0"
+  preferences: '^1.3.0'
 
 flutter_icons:
   android: true

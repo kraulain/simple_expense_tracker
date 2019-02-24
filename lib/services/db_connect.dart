@@ -16,13 +16,25 @@ class DBConnect {
     String path = join(documentsDirectory.path, "ExpenseDB.db");
     return await openDatabase(path, version: 1, onOpen: (db) {
     }, onCreate: (Database db, int version) async {
-      await db.execute("CREATE TABLE expense ("
-          "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-          "amount REAL,"
-          "date_time INTEGER,"
-          "category TEXT,"
-          "details TEXT"
-          ")");
+      String createExpenseTable = "CREATE TABLE expense ("
+          + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+          + "amount REAL,"
+          + "date_time INTEGER,"
+          + "category TEXT,"
+          + "details TEXT"
+          + ")";
+      String createSettingsTable = "CREATE TABLE settings ("
+          + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+          + "language TEXT,"
+          + "currency TEXT,"
+          + "backup TEXT"
+          + ")";
+
+      var batch = db.batch();
+      batch.execute(createExpenseTable);
+      batch.execute(createSettingsTable);
+      await batch.commit(noResult: true);
+
     });
   }
 

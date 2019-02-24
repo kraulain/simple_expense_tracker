@@ -40,4 +40,8 @@ class Settings {
         "currency": currency,
         "backup": backup
       };
+
+  List<String> languages  = ["En", 'Fr', 'De', 'Sp'];
+  List<String> currencies  = ["XAF", '\$', '€', '£', '¥'];
+  List<String> backupOptions = ["yes", "no"];
 }
