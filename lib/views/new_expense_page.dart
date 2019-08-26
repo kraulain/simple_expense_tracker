@@ -57,7 +57,7 @@ class _NewExpensePageState extends State<NewExpensePage> {
               maxLines: 5,
               controller: _detailsController,
               decoration: InputDecoration(
-                labelText: 'Details',
+                labelText: 'Expense Details',
                 hintText: 'Detailed description of what you spent on.',
               ),
             ),
